@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- <bean id="jimin" class="com.example.Student" c:name="한지민" 
+		c:age="14" c:grade="2" c:classNum="5" />	 -->
+	<bean id="jimin" class="com.example.Student">
+		<constructor-arg>
+			<value>한지민</value>
+		</constructor-arg>
+		<constructor-arg value="15" />
+		<constructor-arg value="3" />
+		<constructor-arg value="5" />
+	</bean>
+	<bean id="chulsu" class="com.example.Worker" p:name="김철수" p:age="25" p:job="Programmer" />
+	<bean id="logAop" class="com.example.LogAop" />
+	
+	<aop:config>
+		<aop:aspect id="logger" ref="logAop">
+			<aop:pointcut expression="within(com.example.*)*" id="publicMethod"/>
+			<aop:around method="loggerAop" pointcut-ref="publicMethod"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

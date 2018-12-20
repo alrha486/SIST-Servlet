@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="Member">
+	<resultMap type="memberVo" id="memberMap">
+		<result column="userid" property="userid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result column="age" property="age" jdbcType="TINYINT" javaType="java.lang.Integer"/>
+		<result column="gender" property="gender" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result column="city" property="city" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	</resultMap>
+	<select id="selectAll" resultMap="memberMap" resultType="memberVo">
+		SELECT * FROM Member ORDER BY userid ASC
+	</select>
+	
+	<select id="selectOne" parameterType="java.lang.String" resultMap="memberMap" resultType="memberVo">
+		SELECT * FROM Member WHERE userid = #{userid}
+	</select>
+	
+	<insert id="insert" parameterType="memberVo">
+		INSERT INTO Member VALUES(#{userid}, #{name}, #{age}, #{gender}, #{city})
+	</insert>
+	
+	
+	
+</mapper>
